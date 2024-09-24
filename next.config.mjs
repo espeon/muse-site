@@ -7,7 +7,9 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
 }
 
 /** @type {import('next').NextConfig} */
-export default {}
+export default {
+  output: 'export',
+}
 
 // legacy next.config.js ↓ (not support turbopack)
 

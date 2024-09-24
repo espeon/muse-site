@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-const Card = ({ children, className = "", ...props }) => {
+const Card = ({ children, className = "", ...props } : any) => {
   return (
     <div
       className={clsx(
