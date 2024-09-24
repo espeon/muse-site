@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-neutral-200 dark:bg-neutral-900;
+}
+
 @layer base {
   [data-rehype-pretty-code-figure] pre {
     @apply px-0;
@@ -18,11 +22,11 @@
   [data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
     counter-increment: line;
     content: counter(line);
-    @apply mr-4 inline-block w-4 text-right text-gray-500;
+    @apply inline-block mr-4 w-4 text-right text-gray-500;
   }
 
   [data-rehype-pretty-code-figure] pre [data-line] {
-    @apply border-l-2 border-l-transparent px-3;
+    @apply px-3 border-l-2 border-l-transparent;
   }
 
   [data-rehype-pretty-code-figure] [data-highlighted-line] {
@@ -36,6 +40,42 @@
   }
 
   [data-rehype-pretty-code-figure] [data-chars-id] {
-    @apply border-b-2 p-1 shadow-none;
+    @apply p-1 border-b-2 shadow-none;
   }
+}
+.fade-bottom-10 {
+--mask: linear-gradient(to bottom, 
+rgba(0,0,0, 1) 0,   rgba(0,0,0, 1) 40%, 
+rgba(0,0,0, 0) 95%, rgba(0,0,0, 0) 0
+) 100% 50% / 100% 100% repeat-x;
+
+font: 2em/1.6em Arial;
+-webkit-mask: var(--mask); 
+mask: var(--mask);
+}
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
