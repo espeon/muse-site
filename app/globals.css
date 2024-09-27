@@ -14,6 +14,10 @@ body {
   @apply text-2xl font-semibold
 }
 
+.prose pre {       
+  @apply bg-transparent shadow-none border-none !important;
+}
+
 #nd-docs-layout {
   @apply dark:bg-[#11111b];
 }
