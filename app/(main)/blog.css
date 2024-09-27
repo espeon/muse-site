@@ -2,10 +2,6 @@
   @apply ml-2 border-l-[1px] font-extralight border-slate-500 not-italic;
 }
 
-.prose a {
-  @apply dark:text-purple-300 text-blue-700 hover:text-purple-500 transition-all dark:decoration-slate-700 decoration-slate-300 decoration-1 underline-offset-2;
-}
-
 .prose p,
 .prose li {
   @apply dark:text-gray-300 text-gray-700 font-light mt-0;
