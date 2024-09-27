@@ -14,6 +14,8 @@ import {
   LuUserCircle,
 } from "react-icons/lu";
 
+import Image from "next/image";
+
 export default function Home() {
   return (
     <>
@@ -57,7 +59,8 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col h-full md:h-[50rem] pointer-events-none lg:w-full justify-center md:-mr-96 lg:flex-1 rounded-xl px-4 pt-12 lg:px-0 lg:pt-0 transition-all duration-75">
-              <img
+              <Image
+                alt="A photo of the UI"
                 className="object-contain object-center rounded-xl border-2 border-neutral-500/75"
                 src="https://i.imgur.com/srqAqBc.png"
               />
@@ -97,7 +100,7 @@ export default function Home() {
             <LuGlobe className="mb-2 text-5xl  text-blue-700 dark:text-blue-400" />
             <h3 className="text-2xl font-semibold">Access Anywhere</h3>
             <p>
-              Whether you're at home, commuting, or traveling, access your music
+              Whether you&apos;re at home, commuting, or traveling, access your music
               library with just a browser. Listen from any device with one -
               mobile, desktop, tablet.
             </p>
@@ -186,14 +189,14 @@ export default function Home() {
           Music is personal, and how you consume it should be, too. We made Muse
           to be a beautiful, personal music platform that goes beyond streaming
           services. Your music should be yours to control, curate, and enjoy.
-          All from a system that puts you and your music first. Whether it's the
+          All from a system that puts you and your music first. Whether it&apos;s the
           rare tracks that don’t exist on major platforms or your favorite
           high-fidelity files, Muse puts them right at your fingertips, no
           matter where you are.
         </p>{" "}
         <p className="mt-4 lg:w-full text-lg text-neutral-700 dark:text-neutral-300 leading-loose transition-all duration-300 text-left">
           With Muse, you get the freedom to host your own music collection
-          without limitations*. There's no reliance on third-party services, no
+          without limitations*. There&apos;s no reliance on third-party services, no
           hidden fees, and no ads interrupting your listening experience. It’s a
           platform designed to work the way you want it to—stream your music
           anywhere, organize your library exactly how you like it, and enjoy
@@ -207,9 +210,9 @@ export default function Home() {
         </p>
         <p className="mt-6 lg:w-full text-xl text-neutral-800 dark:text-neutral-200 text-right transition-all duration-300">
           - the Muse maintainers
-        </p>
+        </p> 
         <p className="mt-6 lg:w-full text-sm text-neutral-600 dark:text-neutral-500 text-left transition-all duration-300">
-          * downloading is not available on web apps (sorry!)
+          * downloading is not available on web apps. freedom from limitations not guaranteed.
         </p>
       </div>
 

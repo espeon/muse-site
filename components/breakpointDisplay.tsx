@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import dynamic from "next/dynamic";
 
 const BreakpointDisplay = () => {
-    if(window == undefined) return null;
   const [width, setWidth] = useState(window?.innerWidth ?? 0);
   
   const getBreakpoint = (width: number) => {
@@ -15,7 +15,7 @@ const BreakpointDisplay = () => {
   };
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
+    const handleResize = () => setWidth(window?.innerWidth);
     
     window.addEventListener('resize', handleResize);
     
@@ -39,4 +39,4 @@ const BreakpointDisplay = () => {
   );
 };
 
-export default BreakpointDisplay;
+export default dynamic(() => Promise.resolve(BreakpointDisplay), { ssr: false });

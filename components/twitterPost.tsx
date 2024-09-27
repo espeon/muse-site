@@ -1,4 +1,5 @@
 import Card from "./card";
+import Image from "next/image";
 
 const firstNames = [
     "Alice", "Bob", "Charlie", "Dana", "Eli", "Fiona", 
@@ -24,9 +25,9 @@ const firstNames = [
     "pixel-art", "pixel-art-neutral", "rings", "shapes", "thumbs"
   ];
   
-  const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const getRandomElement = (arr: string | any[]) => arr[Math.floor(Math.random() * arr.length)];
   
-  const generateUsername = (firstName, lastName) => {
+  const generateUsername = (firstName: string, lastName: string) => {
     // Randomly decide if we want to add numbers to the @name
     const useNumbers = Math.random() > 0.5;
     const numberSuffix = useNumbers ? Math.floor(Math.random() * 1000) : '';
@@ -40,7 +41,7 @@ const firstNames = [
     return `@${username}`;
   };
   
-  const TwitterPost = ({ children, ...props }) => {
+  const TwitterPost = ({ children, ...props }: any) => {
     const randomFirstName = props.firstName || getRandomElement(firstNames);
     const randomLastName = props.lastName || getRandomElement(lastNames);
     const randomAvatarStyle = getRandomElement(avatarStyles);
@@ -50,7 +51,7 @@ const firstNames = [
     return (
       <Card className="bg-white dark:bg-gray-800">
         <div className="flex items-center mb-2">
-          <img 
+          <Image 
             src={props.profileImage || `https://api.dicebear.com/9.x/${randomAvatarStyle}/svg?seed=${randomSeed}`} 
             alt={`${randomFirstName} ${randomLastName}`} 
             className="w-10 h-10 rounded-full mr-2" 

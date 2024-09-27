@@ -1,8 +1,8 @@
 import { toRuntime } from "fumadocs-mdx"
-import * as file_0 from "../content/docs/index.mdx?collection=docs&hash=47fb13ad637637f2bb6ede851dfc3d69201fcfd56ae7f56729497c5c224072ff"
-import * as file_1 from "../content/docs/Installation/compose.mdx?collection=docs&hash=47fb13ad637637f2bb6ede851dfc3d69201fcfd56ae7f56729497c5c224072ff"
-import * as file_2 from "../content/docs/Installation/index.mdx?collection=docs&hash=47fb13ad637637f2bb6ede851dfc3d69201fcfd56ae7f56729497c5c224072ff"
-import * as file_3 from "../content/docs/Usage/index.mdx?collection=docs&hash=47fb13ad637637f2bb6ede851dfc3d69201fcfd56ae7f56729497c5c224072ff"
-import * as file_4 from "../content/docs/Usage/integrations.mdx?collection=docs&hash=47fb13ad637637f2bb6ede851dfc3d69201fcfd56ae7f56729497c5c224072ff"
-export const docs = [toRuntime("doc", file_0, {"path":"index.mdx","absolutePath":"/home/user/muse-site/content/docs/index.mdx"}),toRuntime("doc", file_1, {"path":"Installation/compose.mdx","absolutePath":"/home/user/muse-site/content/docs/Installation/compose.mdx"}),toRuntime("doc", file_2, {"path":"Installation/index.mdx","absolutePath":"/home/user/muse-site/content/docs/Installation/index.mdx"}),toRuntime("doc", file_3, {"path":"Usage/index.mdx","absolutePath":"/home/user/muse-site/content/docs/Usage/index.mdx"}),toRuntime("doc", file_4, {"path":"Usage/integrations.mdx","absolutePath":"/home/user/muse-site/content/docs/Usage/integrations.mdx"})]
+import * as file_0 from "../content/docs/index.mdx?collection=docs&hash=7bab669f81774f89fc8f5286cf723639b12d1b41c690a63ea547f32b0a793625"
+import * as file_1 from "../content/docs/Installation/compose.mdx?collection=docs&hash=7bab669f81774f89fc8f5286cf723639b12d1b41c690a63ea547f32b0a793625"
+import * as file_2 from "../content/docs/Installation/index.mdx?collection=docs&hash=7bab669f81774f89fc8f5286cf723639b12d1b41c690a63ea547f32b0a793625"
+import * as file_3 from "../content/docs/Usage/index.mdx?collection=docs&hash=7bab669f81774f89fc8f5286cf723639b12d1b41c690a63ea547f32b0a793625"
+import * as file_4 from "../content/docs/Usage/integrations.mdx?collection=docs&hash=7bab669f81774f89fc8f5286cf723639b12d1b41c690a63ea547f32b0a793625"
+export const docs = [toRuntime("doc", file_0, {"path":"index.mdx","absolutePath":"C:/Users/Natalie/code/muse-site/content/docs/index.mdx"}),toRuntime("doc", file_1, {"path":"Installation\\compose.mdx","absolutePath":"C:/Users/Natalie/code/muse-site/content/docs/Installation/compose.mdx"}),toRuntime("doc", file_2, {"path":"Installation\\index.mdx","absolutePath":"C:/Users/Natalie/code/muse-site/content/docs/Installation/index.mdx"}),toRuntime("doc", file_3, {"path":"Usage\\index.mdx","absolutePath":"C:/Users/Natalie/code/muse-site/content/docs/Usage/index.mdx"}),toRuntime("doc", file_4, {"path":"Usage\\integrations.mdx","absolutePath":"C:/Users/Natalie/code/muse-site/content/docs/Usage/integrations.mdx"})]
 export const meta = []
