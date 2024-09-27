@@ -37,7 +37,7 @@ export default function RootLayout({
 }
 
 export const metadata = {
-  title: "natalie's website",
+  title: "muse audio",
   // good description for seo
-  description: " ",
+  description: "your personal music platform",
 };
