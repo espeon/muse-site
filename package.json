@@ -7,13 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "content": "velite --clean"
+    "content": "velite --clean",
+    "postinstall": "fumadocs-mdx"
   },
   "eslintConfig": {
     "extends": "next/core-web-vitals"
   },
   "dependencies": {
     "@tailwindcss/typography": "latest",
+    "@types/mdx": "^2.0.13",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -21,6 +23,9 @@
     "clsx": "^2.1.1",
     "eslint": "^8",
     "eslint-config-next": "latest",
+    "fumadocs-core": "^13.4.10",
+    "fumadocs-mdx": "^10.0.2",
+    "fumadocs-ui": "^13.4.10",
     "next": "latest",
     "next-themes": "latest",
     "postcss": "latest",

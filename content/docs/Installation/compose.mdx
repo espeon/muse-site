@@ -1,0 +1,188 @@
+---
+title: Compose
+description: Learn how to install Muse Audio with Docker Compose.
+---
+
+# Requirements
+Muse consists of multiple separate programs (pseudo-microservices)
+
+### Maki - the main server
+
+- Rust-based. It should run fine with precompiled binaries.
+- If you're building from source, you'll need [Rust](https://rustup.rs) installed.
+
+### Nozomi - the client
+
+- Next.js based. 
+- If you are building from source, you will need [Node.js](https://nodejs.org/) installed.
+
+
+# Installation
+As mentioned before, the only supported option is via Docker Compose.
+
+### Install Docker
+- Follow the guide [on the Docker docs](https://docs.docker.com/engine/install/) to install on Linux.
+- If you are on Windows or MacOS, you may want to [install Docker Desktop](https://docs.docker.com/desktop/)
+
+### Use the Compose file
+
+Create a compose.yml file with the following content or add the services to your existing file.
+
+```yaml title="compose.yml"
+services:
+  maki-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+
+  maki:
+    image: ghcr.io/espeon/muse/maki:latest
+    volumes:
+      - "/path/to/music:/music"
+      # art cache folder
+      - "./maki/art:/art"
+    ports:
+      - "3033:3033"
+    env_file:
+      - ".env"
+    depends_on:
+      - "maki-db"
+
+  nozomi:
+    image: ghcr.io/espeon/muse/nozomi:latest
+    ports:
+      - "3031:3031"
+    env_file:
+      - ".env"
+    depends_on:
+      - "maki"
+
+  umi:
+    image: ghcr.io/espeon/umi/umi:latest
+    volumes:
+      # mount for lyrics cache
+      - ./tmp/db:/usr/src/app/db
+    ports:
+      - "3032:3032"
+    env_file:
+      - ".env"
+
+networks:
+  default:
+    name: muse
+```
+
+### Set up the environment
+
+You will also need a .env file with the following contents copied and filled out:
+
+```sh title=".env"
+# Please, no slashes at the end for any URLs.
+
+# Internal Maki base URL (e.g. the one that a container can reach)
+INTERNAL_MAKI_BASE_URL=http://maki:3033
+# External Maki base URL (the one the user can reach)
+EXTERNAL_MAKI_BASE_URL=http://api.muse.lutea.co
+# The base URL for Nozomi *the user can reach*
+NOZOMI_BASE_URL=http://muse.lutea.co
+# The base URL for Umi *the user can reach*
+# Can either be a subdomain or a path, if you have that set up
+UMI_BASE_URL=http://umi.muse.lutea.co
+
+# The default oauth client is ZITADEL.
+ZITADEL_CLIENT_ID=y0ur-cl13nt-1d
+ZITADEL_CLIENT_SECRET=y0ur-cl13nt-s3cr3t
+ZITADEL_ISSUER=https://zitadel.your.domain
+AUTH_SECRET=y0ur-auth-s3cr3t
+
+DATABASE_URL=postgres://postgres:password@maki-db:5432/postgres
+
+# Your music mount point
+MOUNT=/music
+
+# Last.FM API creds
+FM_KEY=your-fm-api-key
+FM_SECRET=your-fm-secret
+
+# Spotify API creds
+SPOTIFY_ID=your-spotify-api-creds
+SPOTIFY_SECRET=your-secret
+
+# Apple Music API creds, for Umi
+APPLE_MUSIC_USER_TOKEN=yourAppleMusicUserToken
+
+# Change these if you don't need them
+RUST_BACKTRACE=1
+RUST_LOG=info
+```
+
+## Routing
+You should seriously consider running muse behind a reverse proxy. They have plenty of advantages, such as setting up SSL, and custom routing.
+
+### Traefik
+Traefik is a config based proxy. 
+
+To use Traefik with Muse, you'll need to add it to the docker-compose (or have all the exposed services in the same network) and set up labels on the services you want to expose.
+
+```yaml title="docker-compose.yml"
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:latest
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--entrypoints.https.address=:443"
+      - "--certificatesresolvers.https.acme.tlschallenge=true"
+      #- "--certificatesresolvers.https.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.https.acme.email=your@email.co"
+      - "--certificatesresolvers.https.acme.storage=/letsencrypt/acme.json"
+    ports:
+      # The HTTP port
+      - "80:80"
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      - "./letsencrypt:/letsencrypt"
+    networks:
+        # traefik_proxy is only needed if you are splitting your services up
+      - traefik_proxy
+      - default
+```
+
+On each service you want to expose, add this (for this example, we'll use nozomi):
+
+```yml
+services:
+  nozomi:
+    image: ghcr.io/espeon/muse/nozomi:latest
+    ports:
+      - "3031:3031"
+    env_file:
+      - ".env"
+    depends_on:
+      - "maki"
+    # Add these labels
+    labels:
+      - "traefik.http.routers.nozomi.rule=Host(`muse.your.domain`)"
+      - "traefik.http.routers.nozomi.tls.certresolver=dns"
+      - "traefik.docker.network=traefik_proxy"
+    networks:
+      - traefik_proxy
+      - default
+
+# Add these networks if your traefik instance is in a separate file
+networks:
+  traefik_proxy:
+    external: true
+    name: traefik_proxy
+  default:
+    driver: bridge
+```

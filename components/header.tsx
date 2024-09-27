@@ -16,7 +16,7 @@ export default function Header(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={clsx(
-        "transition-all duration-500 w-full",
+        "transition-all duration-500 w-full px-8",
         props.className,
       )}
       {...props}

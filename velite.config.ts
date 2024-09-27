@@ -61,18 +61,6 @@ const tags = defineCollection({
     .transform(data => ({ ...data, permalink: `/${data.slug}` }))
 })
 
-const pages = defineCollection({
-  name: 'Page',
-  pattern: 'pages/**/*.mdx',
-  schema: s
-    .object({
-      title: s.string().max(99),
-      slug: s.slug('global', ['admin', 'login']),
-      body: s.mdx()
-    })
-    .transform((data, { meta }) => ({ ...data, permalink: `/${data.slug}`, path: meta.path }))
-})
-
 const posts = defineCollection({
   name: 'Post',
   pattern: 'posts/**/*.md',
@@ -99,7 +87,7 @@ const posts = defineCollection({
 })
 
 export default defineConfig({
-  root: 'content',
+  root: 'content/blog',
   output: {
     data: '.velite',
     assets: 'public/static',
@@ -107,7 +95,7 @@ export default defineConfig({
     name: '[name]-[hash:6].[ext]',
     clean: true
   },
-  collections: { options, categories, tags, pages, posts },
+  collections: { options, categories, tags, posts },
   markdown: { rehypePlugins: [rehypePrettyCode] },
   prepare: collections => {
     const { categories, tags, posts } = collections

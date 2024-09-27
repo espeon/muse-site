@@ -6,10 +6,15 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
   await build({ watch: isDev, clean: !isDev })
 }
 
+import { createMDX } from 'fumadocs-mdx/next';
+ 
+const withMDX = createMDX();
+
 /** @type {import('next').NextConfig} */
-export default {
+export default withMDX({
   output: 'export',
-}
+  images: { unoptimized: true } 
+})
 
 // legacy next.config.js ↓ (not support turbopack)
 
