@@ -61,6 +61,8 @@ export default function Home() {
             <div className="flex flex-col h-full md:h-[50rem] pointer-events-none lg:w-full justify-center md:-mr-96 lg:flex-1 rounded-xl px-4 pt-12 lg:px-0 lg:pt-0 transition-all duration-75">
               <Image
                 alt="A photo of the UI"
+                width={1200}
+                height={800}
                 className="object-contain object-center rounded-xl border-2 border-neutral-500/75"
                 src="https://i.imgur.com/srqAqBc.png"
               />

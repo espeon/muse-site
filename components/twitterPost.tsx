@@ -54,6 +54,8 @@ const firstNames = [
           <Image 
             src={props.profileImage || `https://api.dicebear.com/9.x/${randomAvatarStyle}/svg?seed=${randomSeed}`} 
             alt={`${randomFirstName} ${randomLastName}`} 
+            width={40}
+            height={40}
             className="w-10 h-10 rounded-full mr-2" 
           />
                   <div className="flex flex-col">
